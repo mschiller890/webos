@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Pixelify Sans', 'Courier New', monospace;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 5px 5px;
+    padding: 0 16px;
+    height: 40px;
+    flex-shrink: 0;
+
+    background-color: #0c181c;
+    color: rgb(68, 233, 216);
+    border-radius: 16px;
+}
+
+.desktop {
+    flex: 1;
+    margin: 0 5px;
+    
+    /* height: calc(100vh - 50px - 70px); */
+    position: relative;
+    overflow: hidden;
+
+    user-select: none;
+}
+
+.dock {
+    height: 70px;
+    margin: 5px 150px;
+    flex-shrink: 0;
+
+    background-color: #0c181c;
+    border-radius: 16px;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+}
