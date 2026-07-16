@@ -48,6 +48,7 @@ function makeWindowDraggable(windowId, buttonId, closeId, openOnLoad = false) {
 
     if (openButton) {
         openButton.addEventListener("click", () => {
+            windowEl.classList.remove("closing");
             windowEl.classList.add("open");
             focusWindow(windowEl);
         });
@@ -55,7 +56,14 @@ function makeWindowDraggable(windowId, buttonId, closeId, openOnLoad = false) {
 
     if (closeButton) {
         closeButton.addEventListener("click", () => {
-            windowEl.classList.remove("open");
+            if (windowEl.classList.contains("closing")) return;
+            
+            windowEl.classList.add("closing");
+
+            setTimeout(() => {
+                windowEl.classList.remove("closing");
+                windowEl.classList.remove("open");
+            }, 220);
         });
     }
 
@@ -111,3 +119,4 @@ function makeWindowDraggable(windowId, buttonId, closeId, openOnLoad = false) {
 
 makeWindowDraggable("settings-window", "settings-button", "settings-close");
 makeWindowDraggable("welcome-window", null, "welcome-close", true);
+makeWindowDraggable("about-window", "about-button", "about-close");

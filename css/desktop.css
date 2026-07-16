@@ -4,7 +4,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    font-family: 'Pixelify Sans', 'Courier New', monospace;
+    font-family: "DotGothic16", sans-serif;
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: grayscale;
@@ -160,8 +160,8 @@ body {
     width: 600px;
     height: 400px;    
     
-    display: none; /* hidden by default */
-
+    /* display: none; hidden by default */
+    display: flex;
     flex-direction: column;
 
     background: rgba(12, 24, 28, 0.685);
@@ -172,6 +172,11 @@ body {
     overflow: hidden;
 
     box-shadow: 0 15px 40px rgba(0,0,0,.4);
+
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+    pointer-events: none;
+    visibility: hidden;
 }
 
 .window-titlebar {
@@ -185,6 +190,8 @@ body {
 
     background: rgba(0,0,0,.25);
     cursor: move;
+
+    font-weight: bold;
 }
 
 .window-content {
@@ -193,8 +200,44 @@ body {
     overflow: auto;
 }
 
+.window-content h1, .window-content h2 {
+    margin-top: 0;
+}
+
 .window.open {
-    display: flex;
+    /* display: flex; */
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+
+    animation: windowOpen .22s cubic-bezier(.2, .8, .2, 1);
+}
+
+@keyframes windowOpen{
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.window.closing {
+    animation: windowClose .22s cubic-bezier(.4, 0, .2, 1);
+}
+
+@keyframes windowClose{
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to{
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
 }
 
 .window-controls {

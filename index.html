@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="css/desktop.css">
      <script src="js/script.js" defer></script>
 
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet"></head>
 <body>
     <div class="topbar">
         <div class="time" id="time"></div>
@@ -48,13 +47,52 @@
             <h1>Welcome to mikuOS!</h1>
 
             <p>
-                A tiny web-based desktop experience powered by
+                The BEST operating system EVER powered by
                 <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.
             </p>
 
             <p>
                 Explore the desktop, open apps, change themes,
                 and make this little world your own! ✧
+            </p>
+        </div>
+    </div>
+
+    <div class="window" id="about-window">
+        <div class="window-titlebar">
+            <span>About Me</span>
+
+            <div class="window-controls">
+                <button id="about-close">✕</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <h2>mschiller890</h2>
+
+            <p>
+                hey! i'm a hobby developer from the Czech Republic who loves building
+                random projects just because they sound fun. i'm always experimenting
+                with new ideas, learning new technologies, and trying to make things
+                look just a little bit nicer than they did yesterday. >w<
+            </p>
+
+            <hr>
+
+            <h3>favorite things</h3>
+
+            <ul>
+                <li>Hatsune Miku & Vocaloid</li>
+                <li>web, game, software development</li>
+                <li>games (Minecraft, OMORI, <b>Portal</b>)</li>
+                <li>i am also a musician in my free time</li>
+            </ul>
+
+            <hr>
+
+            <p>
+                thanks for stopping by! if you're curious about what i'm working on,
+                check out my projects on github! everything here is a work in
+                progress, and i'm always adding something new. >w<
             </p>
         </div>
     </div>
@@ -73,6 +111,10 @@
 
         <button class="dock-icon" id="settings-button">
             <img src="assets/icons/settings.png">
+        </button>
+
+        <button class="dock-icon" id="about-button">
+            <img src="assets/icons/about.png">
         </button>
     </div>
 </body>
