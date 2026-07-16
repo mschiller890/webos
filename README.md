@@ -84,7 +84,7 @@ some ideas:
 
 # screenshots
 
-*(screenshots coming soon! im lazy!)*
+![screenshot](image.png)
 
 ---
 
