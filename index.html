@@ -15,15 +15,48 @@
 <body>
     <div class="topbar">
         <div class="time" id="time"></div>
-        <div class="buttons">
+        <!-- <div class="buttons">
             <button>b</button>
             <button>w</button>
             <button>p</button>
+        </div> -->
+    </div>
+
+    <div class="window" id="settings-window">
+        <div class="window-titlebar">
+            <span>Settings</span>
+
+            <div class="window-controls">
+                <button id="settings-close">✕</button>
+            </div>
+        </div>
+
+        <div class="window-content">
+            Select a theme: <select><option>Miku (Default)</option></select>
         </div>
     </div>
 
-    <div class="window">
+        <div class="window" id="welcome-window">
+        <div class="window-titlebar">
+            <span>Welcome</span>
 
+            <div class="window-controls">
+                <button id="welcome-close">✕</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <h1>Welcome to mikuOS!</h1>
+
+            <p>
+                A tiny web-based desktop experience powered by
+                <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.
+            </p>
+
+            <p>
+                Explore the desktop, open apps, change themes,
+                and make this little world your own! ✧
+            </p>
+        </div>
     </div>
 
     <div class="desktop">
@@ -35,10 +68,11 @@
 
     <div class="dock">
         <button class="dock-icon">
-            <img src="assets/icons/finder.png"></img>
+            <img src="assets/icons/finder.png">
         </button>
-        <button class="dock-icon">
-            <img src="assets/icons/settings.png"></img>
+
+        <button class="dock-icon" id="settings-button">
+            <img src="assets/icons/settings.png">
         </button>
     </div>
 </body>

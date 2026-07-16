@@ -8,12 +8,14 @@ body {
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: grayscale;
+    color: rgb(68, 233, 216);
 }
 
 .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 999;
 
     margin: 14px 16px;
     padding: 0 16px;
@@ -21,8 +23,8 @@ body {
     flex-shrink: 0;
 
     font-size: 22px;
-    background-color: #0c181c;
-    color: rgb(68, 233, 216);
+    background: rgba(12, 24, 28, 0.685);
+    backdrop-filter: blur(15px);
     border-radius: 16px;
 }
 
@@ -91,6 +93,7 @@ body {
     left: 50%;
     bottom: 16px;
     transform: translateX(-50%);
+    z-index: 67676767676767;
 
     display: flex;
     align-items: flex-end;
@@ -144,4 +147,62 @@ body {
 .controls {
     display: flex;
     gap: 8px;
+}
+
+.window {
+    position: fixed;
+    
+    z-index: 1000;
+
+    top: 120px;
+    left: 200px;
+
+    width: 600px;
+    height: 400px;    
+    
+    display: none; /* hidden by default */
+
+    flex-direction: column;
+
+    background: rgba(12, 24, 28, 0.685);
+    border: 1px solid rgba(68,233,216,.4);
+    border-radius: 16px;
+
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.window-titlebar {
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 14px;
+
+    background: rgba(0,0,0,.25);
+    cursor: move;
+}
+
+.window-content {
+    flex: 1;
+    padding: 16px;
+    overflow: auto;
+}
+
+.window.open {
+    display: flex;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.window-controls button {
+    width: 28px;
+    height: 28px;
 }
