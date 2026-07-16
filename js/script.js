@@ -13,8 +13,10 @@ updateTime();
 setInterval(updateTime, 1000);
 
 const wallpapers = {
+    // from https://wall.alphacoders.com/big.php?i=1315811
     miku: "assets/wallpapers/miku.jpg",
-    meiko: "assets/wallpapers/meiko.jpg",
+    // from https://wall.alphacoders.com/big.php?i=1197047
+    meiko: "assets/wallpapers/meiko.png",
     kaito: "assets/wallpapers/kaito.jpg",
     kagaminetwins: "assets/wallpapers/kagaminetwins.jpg",
     gumi: "assets/wallpapers/gumi.jpg"
@@ -27,7 +29,10 @@ function setBackgroundImage(name = "miku") {
     document.body.style.backgroundRepeat = "no-repeat";
 }
 
-setBackgroundImage();
+const savedWallpaper = localStorage.getItem("wallpaper") || "miku";
+setBackgroundImage(savedWallpaper);
+
+document.getElementById("wallpaper-select").value = savedWallpaper;
 
 let highestZ = 1000;
 
@@ -116,6 +121,14 @@ function makeWindowDraggable(windowId, buttonId, closeId, openOnLoad = false) {
         focusWindow(windowEl);
     }
 }
+
+const wallpaperSelect = document.getElementById("wallpaper-select");
+wallpaperSelect.addEventListener("change", () => {
+    const wallpaper = wallpaperSelect.value;
+
+    setBackgroundImage(wallpaper);
+    localStorage.setItem("wallpaper", wallpaper);
+});
 
 makeWindowDraggable("settings-window", "settings-button", "settings-close");
 makeWindowDraggable("welcome-window", null, "welcome-close", true);
