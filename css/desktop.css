@@ -15,11 +15,12 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    margin: 5px 5px;
+    margin: 14px 16px;
     padding: 0 16px;
-    height: 40px;
+    height: 50px;
     flex-shrink: 0;
 
+    font-size: 22px;
     background-color: #0c181c;
     color: rgb(68, 233, 216);
     border-radius: 16px;
@@ -36,13 +37,108 @@ body {
     user-select: none;
 }
 
-.dock {
-    height: 70px;
-    margin: 5px 150px;
-    flex-shrink: 0;
+.desktop-icon {
+    width: 92px;
+    height: 92px;
+    margin: 5px;
 
-    background-color: #0c181c;
-    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    border-radius: 8px;
+}
+
+.desktop-icon:hover {
+    background-color: rgba(68, 233, 216, 0.1);
+}
+
+.desktop-icon:focus {
+    
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px) saturate(180%);
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(68, 233, 216);
+}
+
+.desktop-icon img {
+    width: 64px;
+    height: 64px;
+
+    /* image-rendering: pixelated; */
+    pointer-events: none;
+}
+
+.desktop-icon span {
+    font: inherit;
+    font-size: 12px;
+    text-align: center;
+    /* text-shadow: 1px 1px 2px black; */
+    
+    pointer-events: none;
+}
+
+.dock {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+
+    padding: 8px 12px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px) saturate(180%);
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 22px;
+}
+
+.dock-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition: transform .15s ease;
+}
+
+.dock-icon img {
+    width: 64px;
+    height: 64px;
+
+    /* image-rendering: pixelated; */
+    pointer-events: none;
+}
+
+.dock-icon:hover {
+    transform: translateY(-8px) scale(1.5);
+}
+
+.dock-icon:has(+ .dock-icon:hover),
+.dock-icon:hover + .dock-icon {
+    transform: scale(1.1) translateY(-5px);
 }
 
 .controls {
