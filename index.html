@@ -40,7 +40,7 @@
         </div>
     </div>
 
-        <div class="window" id="welcome-window">
+    <div class="window" id="welcome-window">
         <div class="window-titlebar">
             <span>Welcome</span>
 
@@ -102,6 +102,39 @@
         </div>
     </div>
 
+    <div class="window" id="browser-window">
+        <div class="window-titlebar">
+            <span>Browser</span>
+
+            <div class="window-controls">
+                <button id="browser-close">✕</button>
+            </div>
+        </div>
+
+        <div class="browser-toolbar">
+            <button id="browser-back">&lt;</button>
+            <button id="browser-forward">&gt;</button>
+            <button id="browser-refresh">⟳</button>
+
+            <input
+                id="browser-url"
+                type="text"
+                value="https://www.google.com"
+                placeholder="Enter URL..."
+            >
+
+            <button id="browser-go">Go</button>
+        </div>
+
+        <div class="browser-content">
+            <iframe
+                id="browser-iframe"
+                src="https://www.google.com"
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+
     <div class="desktop">
         <!-- <button class="desktop-icon">
             <img src="assets/icons/settings.png"></img>
@@ -120,6 +153,10 @@
 
         <button class="dock-icon" id="about-button">
             <img src="assets/icons/about.png">
+        </button>
+
+        <button class="dock-icon" id="browser-button">
+            <img src="assets/icons/browser.png">
         </button>
     </div>
 </body>

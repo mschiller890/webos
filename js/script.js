@@ -130,6 +130,44 @@ wallpaperSelect.addEventListener("change", () => {
     localStorage.setItem("wallpaper", wallpaper);
 });
 
+const browserGo = document.getElementById("browser-go");
+const browserUrl = document.getElementById("browser-url");
+const browserFrame = document.getElementById("browser-iframe");
+// console.log(browserFrame);
+const backButton = document.getElementById("browser-back");
+const forwardButton = document.getElementById("browser-forward");
+const refreshButton = document.getElementById("browser-refresh");
+
+browserGo.addEventListener("click", () => {
+    let url = browserUrl.value.trim();
+    if (!url) return;
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "http://" + url;
+    }
+
+    browserFrame.src = url;
+});
+
+browserUrl.addEventListener("keydown", (e) => {
+    if(e.key === "Enter") {
+        browserGo.click();
+    }
+});
+
+backButton.addEventListener("click", () => {
+    browserFrame.contentWindow.history.back();
+});
+
+forwardButton.addEventListener("click", ()=> {
+    browserFrame.contentWindow.history.forward();
+});
+
+refreshButton.addEventListener("click", () => {
+    browserFrame.contentWindow.location.reload();
+});
+
 makeWindowDraggable("settings-window", "settings-button", "settings-close");
 makeWindowDraggable("welcome-window", null, "welcome-close", true);
 makeWindowDraggable("about-window", "about-button", "about-close");
+makeWindowDraggable("browser-window", "browser-button", "browser-close");
