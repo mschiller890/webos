@@ -122,6 +122,12 @@ function makeWindowDraggable(windowId, buttonId, closeId, openOnLoad = false) {
     }
 }
 
+makeWindowDraggable("settings-window", "settings-button", "settings-close");
+makeWindowDraggable("welcome-window", null, "welcome-close", true);
+makeWindowDraggable("about-window", "about-button", "about-close");
+makeWindowDraggable("browser-window", "browser-button", "browser-close");
+makeWindowDraggable("message-window", null, "message-close");
+
 const wallpaperSelect = document.getElementById("wallpaper-select");
 wallpaperSelect.addEventListener("change", () => {
     const wallpaper = wallpaperSelect.value;
@@ -137,6 +143,20 @@ const browserFrame = document.getElementById("browser-iframe");
 const backButton = document.getElementById("browser-back");
 const forwardButton = document.getElementById("browser-forward");
 const refreshButton = document.getElementById("browser-refresh");
+const browserButton = document.getElementById("browser-button");
+
+browserButton.addEventListener("click", () => {
+    if (!localStorage.getItem("browserNoticeShown")) {
+        setTimeout (() => {
+            showMessageBox(
+                "ALERT!!!!!!!1",
+                "Most websites cannot be displayed in this browser due to security restrictions. This is a known issue and might not be fixed unless I care enough."
+            )
+
+            localStorage.setItem("browserNoticeShown", "true");
+        }, 220);
+    }
+});
 
 browserGo.addEventListener("click", () => {
     let url = browserUrl.value.trim();
@@ -167,7 +187,41 @@ refreshButton.addEventListener("click", () => {
     browserFrame.contentWindow.location.reload();
 });
 
-makeWindowDraggable("settings-window", "settings-button", "settings-close");
-makeWindowDraggable("welcome-window", null, "welcome-close", true);
-makeWindowDraggable("about-window", "about-button", "about-close");
-makeWindowDraggable("browser-window", "browser-button", "browser-close");
+const messageWindow = document.getElementById("message-window");
+messageWindow.style.left = `${(window.innerWidth - messageWindow.offsetWidth) / 2}px`;
+messageWindow.style.top = `${(window.innerHeight - messageWindow.offsetHeight) / 2}px`;
+const messageTitle = document.getElementById("message-title");
+const messageDescription = document.getElementById("message-description");
+
+function showMessageBox(title, description) {
+    messageTitle.textContent = title;
+    messageDescription.textContent = description;
+
+    messageWindow.classList.remove("closing");
+    messageWindow.classList.add("open");
+
+    focusWindow(messageWindow);
+}
+
+function closeMessageBox() {
+    if (messageWindow.classList.contains("closing")) return;
+    
+    messageWindow.classList.add("closing");
+
+    setTimeout(() => {
+        messageWindow.classList.remove("closing");
+        messageWindow.classList.remove("open");
+    }, 220);
+}
+
+document.getElementById("message-close").addEventListener("click", closeMessageBox);
+document.getElementById("message-ok").addEventListener("click", closeMessageBox);
+
+// if (!localStorage.getItem("browserNoticeShown")) {
+//     showMessageBox(
+//         "ALERT!!!!!!!1",
+//         "Most websites cannot be displayed in this browser due to security restrictions. This is a known issue and might not be fixed unless I care enough."
+//     )
+
+//     localStorage.setItem("browserNoticeShown", "true");
+// }

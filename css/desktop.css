@@ -250,11 +250,6 @@ body {
     height: 28px;
 }
 
-
-
-
-
-
 #browser-window {
     width: 800px;
     height: 600px;
@@ -318,4 +313,45 @@ body {
     height: 100%;
 
     border: none;
+}
+
+#message-window {
+    width: 400px;
+    height: auto;
+}
+
+#message-ok {
+    min-width: 80px;
+    height: 34px;
+
+    padding: 0 16px;
+
+    font-family: "DotGothic16", sans-serif;
+    font-size: 16px;
+    color: rgb(68, 233, 216);
+    background: rgba(68, 233, 216, .4);
+
+    border: 1px solid rgba(68, 233, 216, .4);
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease;
+        /* transform .15s ease, */
+        /* box-shadow .15s ease; */
+}
+
+#message-ok:hover {
+    background: rgba(68, 233, 216, .25);
+    
+    /* box-shadow: 0 0 12px rgba(68, 233, 216, .35); */
+    
+    /* transform: translateY(-2px); */
+}
+
+#message-ok:active {
+    transform: translateY(0);
+
+    background: rgba(68, 233, 216, .35);
 }
