@@ -127,6 +127,7 @@ makeWindowDraggable("welcome-window", null, "welcome-close", true);
 makeWindowDraggable("about-window", "about-button", "about-close");
 makeWindowDraggable("browser-window", "browser-button", "browser-close");
 makeWindowDraggable("message-window", null, "message-close");
+makeWindowDraggable("terminal-window", "terminal-button", "terminal-close");
 
 const wallpaperSelect = document.getElementById("wallpaper-select");
 wallpaperSelect.addEventListener("change", () => {
@@ -225,3 +226,148 @@ document.getElementById("message-ok").addEventListener("click", closeMessageBox)
 
 //     localStorage.setItem("browserNoticeShown", "true");
 // }
+
+const terminalButton = document.getElementById("terminal-button");
+terminalButton.addEventListener("click", () => {
+    terminalButton.disabled = true; 
+    terminalWelcomeSequence().then(() => terminalButton.disabled = false);
+});
+
+const cwd = "C:\\>";
+let skip = true;
+
+function openPrompt(cwd) {
+    const terminalText = document.getElementById("terminal-text");
+
+    const promptContainer = document.createElement("div");
+    promptContainer.className = "prompt-line";
+
+    const promptPath = document.createElement("span");
+    promptPath.textContent = cwd;
+    promptContainer.appendChild(promptPath);
+
+    const promptInput = document.createElement("input");
+    promptInput.type = "text";
+    promptInput.className = "terminal-input";
+    promptInput.autofocus = true;
+    promptContainer.appendChild(promptInput);
+
+    terminalText.appendChild(promptContainer);
+
+    terminalText.addEventListener("click", () => {
+        promptInput.focus();
+    });
+    promptInput.focus();
+
+    promptInput.addEventListener("keydown", async (e) => {
+        if (e.key === "Enter") {
+            const command = promptInput.value.trim();
+
+            promptContainer.remove();
+
+            await appendToTerminal(`${cwd}${command}`, 200);
+
+            if (command != "") {
+                await handleCommand(command);
+            }
+
+            openPrompt(cwd);
+        }
+    });
+}
+
+async function handleCommand(command) {
+    const lowerCmd = command.toLowerCase();
+
+    await fakeLoadingSpinningThing(500);
+
+    if (lowerCmd === "ver") {
+        await appendToTerminal("MIKU-DOS Version 6.22", 0);
+    } 
+    else if (lowerCmd === "skip") {
+        skip = !skip;
+        await appendToTerminal(`skip is ${skip ? "enabled" : "disabled"}`, 0);
+    }
+    else {
+        await appendToTerminal("Bad command or file name", 0)
+    }
+}
+
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function terminalWelcomeSequence() {
+    await clearTerminal();
+
+    if (!skip) {
+        await fakeLoadingSpinningThing(3000); 
+        
+        await appendToTerminal("Starting MIKU-DOS...\n", 1000); 
+        
+        await fakeLoadingSpinningThing(3000); 
+
+        await appendToTerminal("HIMEM: DOS XMS Driver, Version 3.10 - 09/30/93", 300);
+        await appendToTerminal("Extended Memory Specification (XMS) Version 3.0", 300);
+        await appendToTerminal("Copyright 1988-2026 mschiller890 Corp.\n", 500);
+
+        await fakeLoadingSpinningThing(5000);
+
+        await appendToTerminal("Installed A20 handler number Z.", 700);
+        await appendToTerminal("HIMEM is testing extended memory...", 700);
+
+        await fakeLoadingSpinningThing(5000);
+
+        await appendToTerminal("done.\n", 800);
+
+        await fakeLoadingSpinningThing(1000);
+
+        await appendToTerminal("64K High Memort Aera is available.\n\n", 800);
+
+        await fakeLoadingSpinningThing(500);
+
+        await appendToTerminal("C:\\>C:\\DOS\\SMARTDRV.EXE /X\n", 800);
+        await appendToTerminal("C:\\>PROMPT $p$g\n", 800);
+        await appendToTerminal("C:\\>PATH C:\\DOS\n", 800);
+        await appendToTerminal("C:\\>SET TEMP=C:\\DOS\n", 800);
+    }
+    await fakeLoadingSpinningThing(1000);
+
+    openPrompt(cwd);
+}
+
+function fakeLoadingSpinningThing(duration) {
+    return new Promise((resolve) => {
+        const stages = ["|", "/", "-", "\\"];
+        const terminalText = document.getElementById("terminal-text");
+        let currentStage = 0;
+
+        const spinnerSpan = document.createElement("span");
+        terminalText.appendChild(spinnerSpan);
+
+        const interval = setInterval(() => {
+            spinnerSpan.textContent = stages[currentStage];
+            currentStage = (currentStage + 1) % stages.length;
+        }, 250);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            spinnerSpan.remove();
+            // terminalText.textContent += "\r\n";
+            resolve();
+        }, duration);
+    });
+}
+
+async function appendToTerminal(text, delay = 0) {
+    const terminalText = document.getElementById("terminal-text");
+    terminalText.textContent += text + "\r\n";
+    
+    if (delay > 0) {
+        await sleep(delay); 
+    }
+}
+
+
+async function clearTerminal() {
+    const terminalText = await document.getElementById("terminal-text");
+    terminalText.textContent = "";
+}

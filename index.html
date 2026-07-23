@@ -153,11 +153,81 @@
         </div>
     </div>
 
+    <div class="window" id="terminal-window">
+        <div class="window-titlebar">
+            <span>Terminal</span>
+
+            <div class="window-controls">
+                <button id="terminal-close">✕</button>
+            </div>
+        </div>
+
+        <div class="terminal-content">
+            <style>
+                .terminal-content {
+                    font-family: monospace;
+                    color: white;
+                    padding-left: 15px;
+
+                    flex-grow: 1;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }
+
+                #terminal-text {
+                    white-space: pre-wrap;
+                    font-family: monospace;
+                }
+
+                .prompt-line {
+                    display:flex;
+                    align-items: center;
+                    width: 100%;
+                }
+
+                .terminal-input {
+                    background: transparent;
+                    border: none;
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    outline: none;
+                    flex-grow:1;
+                    /* margin-left: 4px; */
+                    caret-color: #aaaaaa
+                }
+            </style>
+
+            <div id="terminal-output">
+                <!-- <p id="terminal-welcome">
+                    I installed MS-DOS for this. 
+                </p> -->
+                <p id="terminal-text"></p>
+            </div>
+        </div>
+    </div>
+
     <div class="desktop">
         <!-- <button class="desktop-icon">
             <img src="assets/icons/settings.png"></img>
             <span>Settings</span>
         </button> -->
+    </div>
+
+    <div class="desktop-widgets">
+        <!-- <div class="widget" id="clock-widget">
+            <h3>Clock</h3>
+            <div id="widget-time">00:00</div>
+        </div> -->
+
+        <!-- <div class="widget">
+            <h3>Weather</h3>
+            <div id="widget-weather">Loading...</div>
+        </div>
+
+        <div class="widget">
+            <h3>Listening to...</h3>
+        </div> -->
     </div>
 
     <div class="dock">
@@ -175,6 +245,10 @@
 
         <button class="dock-icon" id="browser-button">
             <img src="assets/icons/browser.png">
+        </button>
+
+        <button class="dock-icon" id="terminal-button">
+            <img src="assets/icons/terminal.png">
         </button>
     </div>
 </body>
